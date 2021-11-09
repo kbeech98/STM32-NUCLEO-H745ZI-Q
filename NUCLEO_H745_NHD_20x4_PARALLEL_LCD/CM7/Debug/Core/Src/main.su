@@ -1,0 +1,5 @@
+main.c:72:5:main	32	static,ignoring_inline_asm
+main.c:163:6:SystemClock_Config	120	static
+main.c:219:13:MX_TIM1_Init	40	static
+main.c:266:13:MX_GPIO_Init	40	static
+main.c:308:6:Error_Handler	4	static,ignoring_inline_asm

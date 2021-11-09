@@ -1,0 +1,10 @@
+13:10:12 **** Incremental Build of configuration Debug for project NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM4 ****
+make -j8 all 
+arm-none-eabi-size   NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4328	     24	   1568	   5920	   1720	NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM4.elf
+Finished building: default.size.stdout
+ 
+
+13:10:12 Build Finished. 0 errors, 0 warnings. (took 228ms)
+
