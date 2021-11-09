@@ -299,3 +299,15 @@ Reason: (4) No device found on target.
 
 !ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2021-11-09 13:08:24.245
 !MESSAGE Existing sessions are:
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-11-09 14:49:32.623
+!MESSAGE Indexed 'NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4' (28 sources, 92 headers) in 3.71 sec: 9,201 declarations; 66,960 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0026%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-11-09 14:49:35.503
+!MESSAGE Indexed 'NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7' (31 sources, 95 headers) in 2.88 sec: 10,087 declarations; 74,780 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0024%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-11-09 14:54:54.055
+!MESSAGE Indexed 'NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4' (24 sources, 85 headers) in 2.9 sec: 7,744 declarations; 54,317 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0032%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-11-09 14:54:56.554
+!MESSAGE Indexed 'NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7' (24 sources, 87 headers) in 2.5 sec: 9,086 declarations; 74,536 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0024%)

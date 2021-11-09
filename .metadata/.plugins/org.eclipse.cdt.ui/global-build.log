@@ -1,17 +1,69 @@
-13:16:52 **** Incremental Build of configuration Debug for project NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7 ****
+15:31:40 **** Incremental Build of configuration Debug for project NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7 ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Krist\STM32CubeIDE\workspace_1.7.0\NUCLEO_H745_NHD_20x4_PARALLEL_LCD\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.elf
+arm-none-eabi-gcc "../Core/Src/nhd_20x4_LCD.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/nhd_20x4_LCD.d" -MT"Core/Src/nhd_20x4_LCD.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/nhd_20x4_LCD.o"
+arm-none-eabi-gcc -o "NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Krist\STM32CubeIDE\workspace_1.7.0\NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf
  
-arm-none-eabi-size   NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.elf 
-arm-none-eabi-objdump -h -S  NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.elf  > "NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.list"
-arm-none-eabi-objcopy  -O binary  NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.elf  "NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.bin"
+arm-none-eabi-size   NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf 
+arm-none-eabi-objdump -h -S  NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf  > "NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.list"
+arm-none-eabi-objcopy  -O binary  NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf  "NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.bin"
    text	   data	    bss	    dec	    hex	filename
-  10748	     24	   1648	  12420	   3084	NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.elf
+  10676	     24	   1648	  12348	   303c	NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf
 Finished building: default.size.stdout
  
-Finished building: NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.bin
+Finished building: NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.bin
  
-Finished building: NUCLEO_H745_NHD_20x4_PARALLEL_LCD_CM7.list
+Finished building: NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.list
+ 
+15:31:48 **** Incremental Build of configuration Debug for project NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4 ****
+make -j8 all 
+arm-none-eabi-size   NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4328	     24	   1568	   5920	   1720	NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf
+Finished building: default.size.stdout
+ 
+15:31:48 **** Incremental Build of configuration Debug for project NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7 ****
+make -j8 all 
+arm-none-eabi-size   NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10676	     24	   1648	  12348	   303c	NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf
+Finished building: default.size.stdout
+ 
+15:32:01 **** Incremental Build of configuration Debug for project NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4 ****
+make -j8 all 
+arm-none-eabi-size   NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4328	     24	   1568	   5920	   1720	NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf
+Finished building: default.size.stdout
+ 
+15:34:38 **** Incremental Build of configuration Debug for project NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4 ****
+make -j8 all 
+arm-none-eabi-size   NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4328	     24	   1568	   5920	   1720	NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf
+Finished building: default.size.stdout
+ 
+15:34:39 **** Incremental Build of configuration Debug for project NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7 ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Krist\STM32CubeIDE\workspace_1.7.0\NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR\CM7\STM32H745ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf
+ 
+arm-none-eabi-size   NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf 
+arm-none-eabi-objdump -h -S  NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf  > "NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.list"
+arm-none-eabi-objcopy  -O binary  NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf  "NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.bin"
+   text	   data	    bss	    dec	    hex	filename
+  10676	     24	   1648	  12348	   303c	NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.bin
+ 
+Finished building: NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7.list
+ 
+15:34:55 **** Incremental Build of configuration Debug for project NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4 ****
+make -j8 all 
+arm-none-eabi-size   NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4328	     24	   1568	   5920	   1720	NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM4.elf
+Finished building: default.size.stdout
  
