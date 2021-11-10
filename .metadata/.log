@@ -311,3 +311,6 @@ Reason: (4) No device found on target.
 
 !ENTRY org.eclipse.cdt.core 1 0 2021-11-09 14:54:56.554
 !MESSAGE Indexed 'NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR_CM7' (24 sources, 87 headers) in 2.5 sec: 9,086 declarations; 74,536 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0024%)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2021-11-09 17:03:15.276
+!MESSAGE Request monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIStack$5$1@641d0ed6): Status CANCEL: unknown code=1  null' resulted in a cancel status: Status CANCEL: unknown code=1  null, even though the request is not set to cancel.

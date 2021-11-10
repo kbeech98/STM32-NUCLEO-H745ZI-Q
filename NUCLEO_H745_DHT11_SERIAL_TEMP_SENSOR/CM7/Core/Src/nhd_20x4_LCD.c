@@ -1,4 +1,5 @@
 //-KB,-5-11-202-
+//nhd_20x4_LCD.c
 
 #include <nhd_20x4_LCD.h>
 #include "stm32h7xx_hal.h"
@@ -24,11 +25,11 @@
 #define timer htim1
 
 extern TIM_HandleTypeDef timer;
-void five_ns_delay (int us)
+void five_ns_delay (int ns)
 {
 	__HAL_TIM_SET_COUNTER(&timer, 0);	//clear timer
 	HAL_TIM_Base_Start_IT(&timer);	//start timer
-	while (__HAL_TIM_GET_COUNTER(&timer) < us);
+	while (__HAL_TIM_GET_COUNTER(&timer) < ns);
 	//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //debugging LED
 }
 

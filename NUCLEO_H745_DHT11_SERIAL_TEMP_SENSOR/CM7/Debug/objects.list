@@ -1,4 +1,5 @@
 "./Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.o"
+"./Core/Src/dht11_temp_sensor.o"
 "./Core/Src/main.o"
 "./Core/Src/nhd_20x4_LCD.o"
 "./Core/Src/stm32h7xx_hal_msp.o"
