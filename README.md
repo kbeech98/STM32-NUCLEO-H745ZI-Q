@@ -1,5 +1,4 @@
 
-<div align="center"><img src="app/src/main/res/mipmap-xhdpi/ic_launcher.png"></div>
 <h1 align="center">STM32-NUCLEO-H745ZI-Q</h1>
 <p align="center"><strong>This repository contains various projects related to the STM32H745ZI-Q NUCLEO dual-core development board.
 </strong>
