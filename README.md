@@ -1,9 +1,9 @@
 # STM32-NUCLEO-H745ZI-Q
-This repository contains various projects related to the STM32H745ZI-Q NUCLEO dual-core development board.
 
 <div align="center"><img src="app/src/main/res/mipmap-xhdpi/ic_launcher.png"></div>
-<h1 align="center">Name</h1>
-<p align="center"><strong>Description</strong>
+<h1 align="center">Kristian Beech</h1>
+<p align="center"><strong>This repository contains various projects related to the STM32H745ZI-Q NUCLEO dual-core development board.
+</strong>
 <br>Comment</p>
 <br/>
 <div align="center"><img src="demo.gif"></img></div>
