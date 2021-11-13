@@ -16,13 +16,12 @@ The idea behind first implementation. What is expected, what should be included,
 
 <h2>Key learnings</h2>
 
-- Be 
-- clear
-- brief 
-- and 
-- concise
+- Implement LCD
+- Temperature and Humidity Sensor (x3, top, middle, bottom) 
+- Soil Moisture Sensor (x2, per pot)
+- Water Pump I/O Relay (x1, per pot)
+- LED Growlight Control (light scheduling program using RTC & brightness through PWM/op-amp)
 
-If project has been improved after submission, here is a good place to specify it.
 
 <h2>Installation</h2>
 
