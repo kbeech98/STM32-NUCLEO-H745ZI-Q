@@ -4,11 +4,11 @@
 <h1 align="center">Kristian Beech</h1>
 <p align="center"><strong>This repository contains various projects related to the STM32H745ZI-Q NUCLEO dual-core development board.
 </strong>
-<br>Comment</p>
+<br>comment</p>
 <br/>
 <div align="center"><img src="demo.gif"></img></div>
 <h2>About</h2>
-Context and progress go here
+This project series will hopefully develop into my GROWBOT automated gardener project.
 
 <h2>Goal and requirements</h2>
 
