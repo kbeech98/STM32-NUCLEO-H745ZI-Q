@@ -29,8 +29,7 @@ Core/Src/dht11_temp_sensor.o: ../Core/Src/dht11_temp_sensor.c \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
- ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
- ../Core/Inc/nhd_20x4_LCD.h
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 
 ../Core/Inc/dht11_temp_sensor.h:
 
@@ -93,5 +92,3 @@ Core/Src/dht11_temp_sensor.o: ../Core/Src/dht11_temp_sensor.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
 
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
-
-../Core/Inc/nhd_20x4_LCD.h:

@@ -1,4 +1,4 @@
-10:34:47 **** Incremental Build of configuration Debug for project H745_TUTORIAL1_CM4 ****
+12:54:17 **** Build of configuration Debug for project H745_TUTORIAL1_CM4 ****
 make -j8 all 
 arm-none-eabi-size   H745_TUTORIAL1_CM4.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size   H745_TUTORIAL1_CM4.elf
 Finished building: default.size.stdout
  
 
-10:34:48 Build Finished. 0 errors, 0 warnings. (took 219ms)
+12:54:18 Build Finished. 0 errors, 0 warnings. (took 355ms)
 

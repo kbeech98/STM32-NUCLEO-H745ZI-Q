@@ -19,11 +19,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "nhd_20x4_LCD.h"
-#include "dht11_temp_sensor.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+#include "dht11_temp_sensor.h"
+#include "nhd_20x4_LCD.h"
 
 /* USER CODE END Includes */
 
@@ -61,10 +62,35 @@ static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
+void Display_Temp (float);
+void Display_Rh (float);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+void Display_Temp (float Temp)
+{
+	char str[20] = {0};
+	lcd_clear();
+	lcd_put_cur(0, 0);
+
+	sprintf (str, "TEMP:- %.2f ", Temp);
+	lcd_send_string(str);
+	lcd_send_data('C');
+}
+
+void Display_Rh (float Rh)
+{
+	char str[20] = {0};
+	lcd_clear();
+	lcd_put_cur(1, 0);
+
+	sprintf (str, "RH:- %.2f ", Rh);
+	lcd_send_string(str);
+	lcd_send_data('%');
+}
 
 /* USER CODE END 0 */
 
@@ -133,11 +159,13 @@ Error_Handler();
   MX_GPIO_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
-  nhd_LCD_Init();
   /* USER CODE BEGIN 2 */
 
+  nhd_LCD_Init();
   lcd_put_cur(0,1);
   lcd_send_string("hiiiii");
+
+  //delay_TEST();
 
   /* USER CODE END 2 */
 
@@ -148,9 +176,13 @@ Error_Handler();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   	// pull the pin high
+	  HAL_Delay(3000);									//wait 3 seconds
 	  poll_DHT11();
-	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
-	  HAL_Delay(2000);
+	  	  Display_Temp(Temperature);
+		  Display_Rh(Humidity);
+	  //HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+	  HAL_Delay(3000);
 
   }
   /* USER CODE END 3 */
@@ -277,9 +309,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 200-1;
+  htim2.Init.Prescaler = 170-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 4294967295;
+  htim2.Init.Period = 4294967296-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -316,6 +348,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
@@ -323,6 +356,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PB14 */
   GPIO_InitStruct.Pin = GPIO_PIN_14;
@@ -340,9 +376,26 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PE0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 4 */
+
+// Callback: timer has rolled over
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // Check which version of the timer triggered this callback and toggle LED
+  if (htim == &htim2 )
+  {
+    HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_0);
+  }
+}
 
 /* USER CODE END 4 */
 
