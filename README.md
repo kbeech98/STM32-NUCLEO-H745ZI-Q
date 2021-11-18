@@ -18,7 +18,7 @@ The idea behind first implementation. What is expected, what should be included,
 - Temperature and Humidity Sensor 
 - Soil Moisture Sensor 
 - Water Pump I/O Relay 
-- LED Growlight 
+- OP-amp PWM controlled LED Growlight 
 
 
 <h2>Installation</h2>
