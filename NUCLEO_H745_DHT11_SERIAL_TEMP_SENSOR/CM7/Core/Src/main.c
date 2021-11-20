@@ -62,7 +62,7 @@ static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
-void Display_Temp (float);
+void Display_Temp_Rh (float,float);
 void Display_Rh (float);
 
 /* USER CODE END PFP */
@@ -70,21 +70,25 @@ void Display_Rh (float);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void Display_Temp (float Temp)
+void Display_Temp_Rh (float Temp, float Rh)
 {
-	char str[20] = {0};
-	lcd_clear();
+	char str_temp[20] = {0},
+			str_Rh[20] = {0};
+	//lcd_clear();
 	lcd_put_cur(0, 0);
 
-	sprintf (str, "TEMP:- %.2f ", Temp);
-	lcd_send_string(str);
+	sprintf (str_temp, "TEMP: %.2f ", Temp);
+	sprintf (str_Rh, "RH: %.2f ", Rh);
+	lcd_send_string(str_temp);
 	lcd_send_data('C');
+	lcd_put_cur(1, 0);
+	lcd_send_string(str_Rh);
+	lcd_send_data('%');
 }
 
-void Display_Rh (float Rh)
+void Display_Rh (float Rh) //display Rh after temp
 {
 	char str[20] = {0};
-	lcd_clear();
 	lcd_put_cur(1, 0);
 
 	sprintf (str, "RH:- %.2f ", Rh);
@@ -163,7 +167,7 @@ Error_Handler();
 
   nhd_LCD_Init();
   lcd_put_cur(0,1);
-  lcd_send_string("hiiiii");
+  lcd_send_string("hiiiii there");
 
   //delay_TEST();
 
@@ -177,12 +181,11 @@ Error_Handler();
 
     /* USER CODE BEGIN 3 */
 	  HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   	// pull the pin high
-	  HAL_Delay(3000);									//wait 3 seconds
+	  HAL_Delay(4000);									//wait 3 seconds
 	  poll_DHT11();
-	  	  Display_Temp(Temperature);
-		  Display_Rh(Humidity);
-	  //HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
-	  HAL_Delay(3000);
+	  Display_Temp_Rh(Temperature,Humidity);
+	  //Display_Rh(Humidity);
+	  //HAL_Delay(3000);
 
   }
   /* USER CODE END 3 */

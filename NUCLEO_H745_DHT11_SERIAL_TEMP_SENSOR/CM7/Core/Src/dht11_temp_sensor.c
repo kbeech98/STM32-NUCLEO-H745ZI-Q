@@ -5,7 +5,7 @@
 
 //Define DHT11 global variables
 uint8_t Rh_byte1, Rh_byte2, Temp_byte1, Temp_byte2;
-uint16_t SUM, RH, TEMP;
+float SUM, RH, TEMP;
 uint8_t Presence = 0;
 
 
@@ -95,11 +95,16 @@ void poll_DHT11(void)
 	Temp_byte2 = DHT11_Read ();
 	SUM = DHT11_Read();
 
-	TEMP = Temp_byte1;
-	RH = Rh_byte1;
+	TEMP = (float) (Temp_byte2);
+	TEMP /= 10.0;
+	TEMP += Temp_byte1;
 
-	Temperature = (float) TEMP;
-	Humidity = (float) RH;
+	RH = (float) (Rh_byte2);
+	RH /= 10.0;
+	RH += Rh_byte1;
+
+	Temperature = (float) (TEMP);
+	Humidity = (float) (RH);
 }
 
 void delay_TEST (void) {

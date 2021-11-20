@@ -5,4 +5,4 @@ dht11_temp_sensor.c:41:6:DHT11_Start	8	static
 dht11_temp_sensor.c:53:9:DHT11_Read	16	static
 dht11_temp_sensor.c:70:9:DHT11_Check_Response	16	static
 dht11_temp_sensor.c:87:6:poll_DHT11	8	static
-dht11_temp_sensor.c:105:6:delay_TEST	8	static
+dht11_temp_sensor.c:110:6:delay_TEST	8	static
