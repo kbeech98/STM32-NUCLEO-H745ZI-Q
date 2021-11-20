@@ -7,6 +7,7 @@
 <div align="center"><img src="demo.gif"></img></div>
 <h2>About</h2>
 This project series will hopefully develop into my GROWBOT automated gardener project.
+The main goal of this repository is to present the various projects and steps taken to acheieve this. 
 
 <h2>The Workflow</h2>
 
