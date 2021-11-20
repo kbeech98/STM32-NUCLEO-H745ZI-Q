@@ -14,6 +14,8 @@ The main goal of this repository is to present the various projects and steps ta
 First I implented the 20x4 LCD using a 4-bit addressing mode, had issues with: choosing write locations on display, timing in the initilization sequence, sending 8-bit data/commands in 4-bit nibbles//order of MSB/LSB.
 Then the implementing the DHT11 sensor using single-wire serial communication. This was done using a 10KOhm pull-up resistor between the signal line and Vdd(+3.3V). Had issues with: implementing the timer to have an accurate delay, used ossciloscope to debug the signal line and determined timer delays were not correct. The used PWM and the osscilloscope to measure the actual period and corrected it in the code. Also had issues with displaying the decimal values of the temp and humidity readings. Had to convert the 8-bit decimal value to float by dividing by 10 then I added with the tens and ones value to get full value. 
 
+Next will be setting up the analog capacitive soil moisture sensors, I want to have multiple sensor read only using one ADC, this will be implemented using the DMA to pipe multiple inputs to memory. 
+
 <h2>Key learnings</h2>
 
 - Implement LCD
