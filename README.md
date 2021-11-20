@@ -20,7 +20,7 @@ Next will be setting up the analog capacitive soil moisture sensors, I want to h
 
 - Implement LCD
 - Temperature and Humidity Sensor 
-- Soil Moisture Sensor 
+- DMA controlled Soil Moisture Sensor 
 - Water Pump I/O Relay 
 - OP-amp PWM controlled LED Growlight 
 
