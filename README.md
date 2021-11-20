@@ -2,7 +2,7 @@
 <h1 align="center">STM32-NUCLEO-H745ZI-Q</h1>
 <p align="center"><strong>This repository contains various projects related to the STM32H745ZI-Q NUCLEO dual-core development board.
 </strong>
-<br>comment</p>
+<br></p>
 <br/>
 <div align="center"><img src="demo.gif"></img></div>
 <h2>About</h2>
