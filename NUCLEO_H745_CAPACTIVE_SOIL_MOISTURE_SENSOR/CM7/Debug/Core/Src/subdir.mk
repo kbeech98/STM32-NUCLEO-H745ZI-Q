@@ -5,6 +5,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/DFRobot_soil_moisture_sensor.c \
 ../Core/Src/dht11_temp_sensor.c \
 ../Core/Src/main.c \
 ../Core/Src/nhd_20x4_LCD.c \
@@ -14,6 +15,7 @@ C_SRCS += \
 ../Core/Src/sysmem.c 
 
 OBJS += \
+./Core/Src/DFRobot_soil_moisture_sensor.o \
 ./Core/Src/dht11_temp_sensor.o \
 ./Core/Src/main.o \
 ./Core/Src/nhd_20x4_LCD.o \
@@ -23,6 +25,7 @@ OBJS += \
 ./Core/Src/sysmem.o 
 
 C_DEPS += \
+./Core/Src/DFRobot_soil_moisture_sensor.d \
 ./Core/Src/dht11_temp_sensor.d \
 ./Core/Src/main.d \
 ./Core/Src/nhd_20x4_LCD.d \

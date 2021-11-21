@@ -18,6 +18,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -25,6 +26,7 @@
 
 #include "dht11_temp_sensor.h"
 #include "nhd_20x4_LCD.h"
+#include "DFRobot_soil_sensor.h"
 
 /* USER CODE END Includes */
 
@@ -47,11 +49,17 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
+
+volatile uint16_t	SoilSensor[2];
+const int adcSoilSensorCount = sizeof (SoilSensor) / sizeof (SoilSensor[0]);
+volatile int adcConversionComplete = 0; //set by interrupt callback
 
 /* USER CODE END PV */
 
@@ -59,18 +67,21 @@ TIM_HandleTypeDef htim2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_DMA_Init(void);
+static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 void Display_Temp_Rh (float,float);
 void Display_Rh (float);
+void Display_Soil_Moisture (int,int);
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void Display_Temp_Rh (float Temp, float Rh)
+void Display_Temp_Rh(float Temp, float Rh)
 {
 	char str_temp[20] = {0},
 			str_Rh[20] = {0};
@@ -86,7 +97,23 @@ void Display_Temp_Rh (float Temp, float Rh)
 	lcd_send_data('%');
 }
 
-void Display_Rh (float Rh) //display Rh after temp
+void Display_Soil_Moisture(int Sensor1,int Sensor2)
+{
+	char str_1[20] = {0},
+			str_2[20] = {0};
+	//lcd_clear();
+	lcd_put_cur(0, 0);
+
+	sprintf (str_1, "SoilSensor1: %i ", Sensor1);
+	sprintf (str_2, "SoilSensor2: %i ", Sensor2);
+	lcd_send_string(str_1);
+	//lcd_send_data('C');
+	lcd_put_cur(1, 0);
+	lcd_send_string(str_2);
+	//lcd_send_data('%');
+}
+
+void Display_Rh(float Rh) //display Rh after temp
 {
 	char str[20] = {0};
 	lcd_put_cur(1, 0);
@@ -94,6 +121,16 @@ void Display_Rh (float Rh) //display Rh after temp
 	sprintf (str, "RH:- %.2f ", Rh);
 	lcd_send_string(str);
 	lcd_send_data('%');
+}
+
+void poll_SOIL_SENSOR(void)
+{
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)SoilSensor, adcSoilSensorCount);
+	while(adcConversionComplete == 0)
+	{
+
+	}
+	adcConversionComplete = 0;	//reset
 }
 
 /* USER CODE END 0 */
@@ -162,30 +199,34 @@ Error_Handler();
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM1_Init();
+  MX_DMA_Init();
+  MX_ADC1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
   nhd_LCD_Init();
   lcd_put_cur(0,1);
   lcd_send_string("hiiiii there");
-
+  HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   	// pull the pin high
+  HAL_Delay(1000);				//wait 1 second
   //delay_TEST();
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+  while(1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   	// pull the pin high
-	  HAL_Delay(4000);									//wait 3 seconds
 	  poll_DHT11();
-	  Display_Temp_Rh(Temperature,Humidity);
+	  //Display_Temp_Rh(Temperature,Humidity);
 	  //Display_Rh(Humidity);
-	  //HAL_Delay(3000);
+	  //HAL_Delay(4000);			//display temp data for 4 seconds
+	  poll_SOIL_SENSOR();
+	  Display_Soil_Moisture(SoilSensor[0],SoilSensor[1]);
+	  HAL_Delay(4000);			//display  soil data for 4 seconds
 
   }
   /* USER CODE END 3 */
@@ -208,6 +249,9 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+  /** Macro to configure the PLL clock source
+  */
+  __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSE);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -244,6 +288,78 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC1_Init(void)
+{
+
+  /* USER CODE BEGIN ADC1_Init 0 */
+
+  /* USER CODE END ADC1_Init 0 */
+
+  ADC_MultiModeTypeDef multimode = {0};
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC1_Init 1 */
+
+  /* USER CODE END ADC1_Init 1 */
+  /** Common config
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV4;
+  hadc1.Init.Resolution = ADC_RESOLUTION_16B;
+  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  hadc1.Init.LowPowerAutoWait = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.NbrOfConversion = 2;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+  hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
+  hadc1.Init.OversamplingMode = DISABLE;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure the ADC multi-mode
+  */
+  multimode.Mode = ADC_MODE_INDEPENDENT;
+  if (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfig.SingleDiff = ADC_SINGLE_ENDED;
+  sConfig.OffsetNumber = ADC_OFFSET_NONE;
+  sConfig.Offset = 0;
+  sConfig.OffsetSignedSaturation = DISABLE;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
@@ -339,6 +455,22 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -349,6 +481,8 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
@@ -394,10 +528,19 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   // Check which version of the timer triggered this callback and toggle LED
-  if (htim == &htim2 )
-  {
-    HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_0);
-  }
+	if (htim == &htim2 )
+	{
+		HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_0);
+	}
+}
+
+//Callback: successful soil sensor adc conversions
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	if (hadc == &hadc1 )
+	  {
+	    adcConversionComplete = 1;
+	  }
 }
 
 /* USER CODE END 4 */

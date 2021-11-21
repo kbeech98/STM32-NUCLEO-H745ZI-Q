@@ -1,0 +1,13 @@
+/*
+ * DFRobot_soil_moisture_sensor.h
+ *
+ *  Created on: Nov. 20, 2021
+ *      Author: Kristian Beech
+ */
+
+#ifndef INC_DFROBOT_SOIL_MOISTURE_SENSOR_H_
+#define INC_DFROBOT_SOIL_MOISTURE_SENSOR_H_
+
+void poll_SOIL_SENSOR(void);
+
+#endif /* INC_DFROBOT_SOIL_MOISTURE_SENSOR_H_ */

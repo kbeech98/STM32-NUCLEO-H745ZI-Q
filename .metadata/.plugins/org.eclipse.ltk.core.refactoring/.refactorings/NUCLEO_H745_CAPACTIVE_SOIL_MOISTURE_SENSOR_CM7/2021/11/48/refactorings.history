@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM7/Core/Inc/DFRobot_soil_moisture_sensor.h&apos; to &apos;DFRobot_soil_sensor.h&apos;" description="Rename resource &apos;DFRobot_soil_moisture_sensor.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/DFRobot_soil_moisture_sensor.h" name="DFRobot_soil_sensor.h" stamp="1637467624730" updateReferences="true"/>
+</session>

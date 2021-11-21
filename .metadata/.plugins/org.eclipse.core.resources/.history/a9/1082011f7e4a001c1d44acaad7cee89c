@@ -1,0 +1,20 @@
+/*
+ * DFRobot_soil_moisture_sensor.c
+ *
+ *  Created on: Nov. 20, 2021
+ *      Author: Kristian Beech
+ */
+
+#include "DFRobot_soil_moisture_sensor.h"
+
+#define SOIL_SENS1_PORT GPIOF
+#define SOIL_SENS1_PIN GPIO_PIN_6
+
+volatile uint16_t	SoilSensor[2];
+const int adcSoilSensorCount = sizeof (SoilSensor) / sizeof (SoilSensor[0]);
+volatile int adcConversionComplete = 0; //set by interrupt callback
+
+void poll_SOIL_SENSOR(void)
+{
+
+}
