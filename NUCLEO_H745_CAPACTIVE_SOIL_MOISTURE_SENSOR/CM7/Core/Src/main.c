@@ -18,7 +18,6 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -83,13 +82,13 @@ void Display_Soil_Moisture (int,int);
 
 void Display_Temp_Rh(float Temp, float Rh)
 {
-	char str_temp[20] = {0},
-			str_Rh[20] = {0};
+	char str_temp[15] = {0},
+			str_Rh[15] = {0};
 	//lcd_clear();
 	lcd_put_cur(0, 0);
 
-	sprintf (str_temp, "TEMP: %.2f ", Temp);
-	sprintf (str_Rh, "RH: %.2f ", Rh);
+	sprintf (str_temp, "TEMP: %.1f", Temp);
+	sprintf (str_Rh, "RH: %.0f", Rh);
 	lcd_send_string(str_temp);
 	lcd_send_data('C');
 	lcd_put_cur(1, 0);
@@ -101,13 +100,12 @@ void Display_Soil_Moisture(int Sensor1,int Sensor2)
 {
 	char str_1[20] = {0},
 			str_2[20] = {0};
-	//lcd_clear();
 	lcd_put_cur(0, 0);
 
 	sprintf (str_1, "SoilSensor1: %i ", Sensor1);
 	sprintf (str_2, "SoilSensor2: %i ", Sensor2);
 	lcd_send_string(str_1);
-	//lcd_send_data('C');
+	lcd_send_data('C');
 	lcd_put_cur(1, 0);
 	lcd_send_string(str_2);
 	//lcd_send_data('%');
@@ -118,7 +116,7 @@ void Display_Rh(float Rh) //display Rh after temp
 	char str[20] = {0};
 	lcd_put_cur(1, 0);
 
-	sprintf (str, "RH:- %.2f ", Rh);
+	sprintf (str, "RH:- %.0f ", Rh);
 	lcd_send_string(str);
 	lcd_send_data('%');
 }
@@ -126,11 +124,13 @@ void Display_Rh(float Rh) //display Rh after temp
 void poll_SOIL_SENSOR(void)
 {
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)SoilSensor, adcSoilSensorCount);
+	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
 	while(adcConversionComplete == 0)
 	{
 
 	}
 	adcConversionComplete = 0;	//reset
+	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
 }
 
 /* USER CODE END 0 */
@@ -156,12 +156,12 @@ int main(void)
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
   /* Wait until CPU2 boots and enters in stop mode or timeout*/
-  timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
-  if ( timeout < 0 )
-  {
-  Error_Handler();
-  }
+//  timeout = 0xFFFF;
+//  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
+//  if ( timeout < 0 )
+//  {
+//  Error_Handler();
+//  }
 /* USER CODE END Boot_Mode_Sequence_1 */
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -180,16 +180,16 @@ HSEM notification */
 /*HW semaphore Clock enable*/
 __HAL_RCC_HSEM_CLK_ENABLE();
 /*Take HSEM */
-HAL_HSEM_FastTake(HSEM_ID_0);
-/*Release HSEM in order to notify the CPU2(CM4)*/
-HAL_HSEM_Release(HSEM_ID_0,0);
-/* wait until CPU2 wakes up from stop mode */
-timeout = 0xFFFF;
-while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
-if ( timeout < 0 )
-{
-Error_Handler();
-}
+//HAL_HSEM_FastTake(HSEM_ID_0);
+///*Release HSEM in order to notify the CPU2(CM4)*/
+//HAL_HSEM_Release(HSEM_ID_0,0);
+///* wait until CPU2 wakes up from stop mode */
+//timeout = 0xFFFF;
+//while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
+//if ( timeout < 0 )
+//{
+//Error_Handler();
+//}
 /* USER CODE END Boot_Mode_Sequence_2 */
 
   /* USER CODE BEGIN SysInit */
@@ -206,7 +206,7 @@ Error_Handler();
 
   nhd_LCD_Init();
   lcd_put_cur(0,1);
-  lcd_send_string("hiiiii there");
+  lcd_send_string("hiiiii there");				//LCD splashscreen
   HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   	// pull the pin high
   HAL_Delay(1000);				//wait 1 second
   //delay_TEST();
@@ -220,13 +220,14 @@ Error_Handler();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  lcd_clear();
 	  poll_DHT11();
-	  //Display_Temp_Rh(Temperature,Humidity);
+	  Display_Temp_Rh(Temperature,Humidity);
 	  //Display_Rh(Humidity);
-	  //HAL_Delay(4000);			//display temp data for 4 seconds
+	  HAL_Delay(2000);			//display temp data for 4 seconds
 	  poll_SOIL_SENSOR();
 	  Display_Soil_Moisture(SoilSensor[0],SoilSensor[1]);
-	  HAL_Delay(4000);			//display  soil data for 4 seconds
+	  HAL_Delay(2000);			//display  soil data for 4 seconds
 
   }
   /* USER CODE END 3 */
@@ -482,7 +483,6 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();

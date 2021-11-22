@@ -73,7 +73,7 @@ uint8_t DHT11_Check_Response (void)
 	two_half_us_delay(14);
 	if (!(HAL_GPIO_ReadPin (DHT11_PORT, DHT11_PIN)))
 	{
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
+		//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
 		two_half_us_delay(30);
 		if ((HAL_GPIO_ReadPin (DHT11_PORT, DHT11_PIN))) Response = 1;
 		else Response = -1; // 255
