@@ -25,7 +25,7 @@
 #define timer htim1
 
 extern TIM_HandleTypeDef timer;
-void five_ns_delay (int ns)
+void thirty_ns_delay (int ns)				//31.25 ns delay
 {
 	__HAL_TIM_SET_COUNTER(&timer, 0);	//clear timer
 	HAL_TIM_Base_Start_IT(&timer);	//start timer
@@ -156,7 +156,7 @@ void lcd_send_string (char *str)
 
 void lcd_nibble() {
 	HAL_GPIO_WritePin(EN_GPIO_Port, EN_Pin, 1);
-	five_ns_delay(65);								//325ns enable pulse width delay
+	thirty_ns_delay(11);			//343.75 ns delay > required 325ns enable pulse width delay
 	//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); 	//debugging LED
 	HAL_GPIO_WritePin(EN_GPIO_Port, EN_Pin, 0);
 }

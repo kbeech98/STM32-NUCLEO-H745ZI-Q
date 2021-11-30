@@ -19,6 +19,6 @@ void lcd_clear(void);
 
 void lcd_nibble(void);
 
-void five_ns_delay (int ns);
+void thirty_ns_delay (int ns);
 
 #endif /* INC_NHD_20X4_LCD_H_ */

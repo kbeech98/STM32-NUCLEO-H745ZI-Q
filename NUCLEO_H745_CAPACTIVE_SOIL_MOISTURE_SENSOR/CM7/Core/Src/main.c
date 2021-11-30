@@ -57,7 +57,7 @@ TIM_HandleTypeDef htim2;
 /* USER CODE BEGIN PV */
 
 volatile uint16_t	SoilSensor[2];
-const int adcSoilSensorCount = sizeof (SoilSensor) / sizeof (SoilSensor[0]);
+const int adcSoilSensorCount = (sizeof (SoilSensor) / sizeof (SoilSensor[0]));
 volatile int adcConversionComplete = 0; //set by interrupt callback
 
 /* USER CODE END PV */
@@ -74,6 +74,8 @@ static void MX_TIM2_Init(void);
 void Display_Temp_Rh (float,float);
 void Display_Rh (float);
 void Display_Soil_Moisture (int,int);
+void poll_SOIL_SENSOR(void);
+
 
 /* USER CODE END PFP */
 
@@ -204,6 +206,8 @@ __HAL_RCC_HSEM_CLK_ENABLE();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
+
+
   nhd_LCD_Init();
   lcd_put_cur(0,1);
   lcd_send_string("hiiiii there");				//LCD splashscreen
@@ -225,8 +229,9 @@ __HAL_RCC_HSEM_CLK_ENABLE();
 	  Display_Temp_Rh(Temperature,Humidity);
 	  //Display_Rh(Humidity);
 	  HAL_Delay(2000);			//display temp data for 4 seconds
-	  poll_SOIL_SENSOR();
-	  Display_Soil_Moisture(SoilSensor[0],SoilSensor[1]);
+//	  lcd_clear();
+//	  poll_SOIL_SENSOR();
+//	  Display_Soil_Moisture(SoilSensor[0],SoilSensor[1]);
 	  HAL_Delay(2000);			//display  soil data for 4 seconds
 
   }
@@ -247,27 +252,20 @@ void SystemClock_Config(void)
   HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
   /** Configure the main internal regulator output voltage
   */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
   /** Macro to configure the PLL clock source
   */
-  __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSE);
+  __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSI);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 5;
-  RCC_OscInitStruct.PLL.PLLN = 160;
-  RCC_OscInitStruct.PLL.PLLP = 2;
-  RCC_OscInitStruct.PLL.PLLQ = 2;
-  RCC_OscInitStruct.PLL.PLLR = 2;
-  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
-  RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
-  RCC_OscInitStruct.PLL.PLLFRACN = 0;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -277,7 +275,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
                               |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
@@ -285,7 +283,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }
@@ -312,7 +310,7 @@ static void MX_ADC1_Init(void)
   /** Common config
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV4;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
   hadc1.Init.Resolution = ADC_RESOLUTION_16B;
   hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
@@ -352,6 +350,7 @@ static void MX_ADC1_Init(void)
   }
   /** Configure Regular Channel
   */
+  sConfig.Channel = ADC_CHANNEL_5;
   sConfig.Rank = ADC_REGULAR_RANK_2;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
@@ -429,7 +428,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 170-1;
+  htim2.Init.Prescaler = 32-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 4294967296-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -481,7 +480,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
@@ -537,10 +535,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //Callback: successful soil sensor adc conversions
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-	if (hadc == &hadc1 )
-	  {
+	//if (hadc == &hadc1 )
+	  //{
 	    adcConversionComplete = 1;
-	  }
+	  //}
 }
 
 /* USER CODE END 4 */

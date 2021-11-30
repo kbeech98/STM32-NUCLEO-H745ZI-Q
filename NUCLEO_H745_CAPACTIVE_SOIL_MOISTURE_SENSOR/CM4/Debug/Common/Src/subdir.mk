@@ -5,16 +5,26 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+C:/Users/Krist/STM32CubeIDE/workspace_1.7.0/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR/Common/Src/dht11_temp_sensor.c \
+C:/Users/Krist/STM32CubeIDE/workspace_1.7.0/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR/Common/Src/nhd_20x4_LCD.c \
 C:/Users/Krist/STM32CubeIDE/workspace_1.7.0/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR/Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.c 
 
 OBJS += \
+./Common/Src/dht11_temp_sensor.o \
+./Common/Src/nhd_20x4_LCD.o \
 ./Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.o 
 
 C_DEPS += \
+./Common/Src/dht11_temp_sensor.d \
+./Common/Src/nhd_20x4_LCD.d \
 ./Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
+Common/Src/dht11_temp_sensor.o: C:/Users/Krist/STM32CubeIDE/workspace_1.7.0/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR/Common/Src/dht11_temp_sensor.c Common/Src/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Common/Src/nhd_20x4_LCD.o: C:/Users/Krist/STM32CubeIDE/workspace_1.7.0/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR/Common/Src/nhd_20x4_LCD.c Common/Src/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.o: C:/Users/Krist/STM32CubeIDE/workspace_1.7.0/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR/Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.c Common/Src/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32H745xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 

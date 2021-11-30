@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM4/Common/Src/dht11_temp_sensor.c" element2="/NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM4/Common/Src/nhd_20x4_LCD.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1638227023155"/>
+</session>

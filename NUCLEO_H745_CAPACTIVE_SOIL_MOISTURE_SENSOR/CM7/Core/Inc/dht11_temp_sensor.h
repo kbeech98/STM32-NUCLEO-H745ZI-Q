@@ -14,7 +14,7 @@ float Humidity;
 #include "stm32h7xx_hal.h"
 #include "stdio.h"
 
-void two_half_us_delay (uint16_t us);
+void us_delay(uint16_t us);
 
 void delay_TEST (void);
 

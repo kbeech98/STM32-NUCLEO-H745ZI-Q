@@ -1,4 +1,4 @@
-nhd_20x4_LCD.c:28:6:five_ns_delay	16	static
+nhd_20x4_LCD.c:28:6:thirty_ns_delay	16	static
 nhd_20x4_LCD.c:36:6:send_to_lcd	16	static
 nhd_20x4_LCD.c:52:6:lcd_send_cmd	24	static
 nhd_20x4_LCD.c:67:6:lcd_send_data	24	static

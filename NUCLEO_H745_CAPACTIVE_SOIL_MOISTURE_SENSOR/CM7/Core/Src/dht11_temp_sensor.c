@@ -13,7 +13,7 @@ uint8_t Presence = 0;
 #define timer2 htim2
 
 extern TIM_HandleTypeDef timer2;
-void two_half_us_delay (uint16_t us)
+void us_delay (uint16_t us)
 {
 	__HAL_TIM_SET_COUNTER(&timer2, 0);		//clear timer
 	HAL_TIM_Base_Start_IT(&timer2);			//start timer
@@ -42,12 +42,12 @@ void DHT11_Start (void)
 {
 	Set_Pin_Output (DHT11_PORT, DHT11_PIN);  		// set the pin as output
 	HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 0);   // pull the pin low
-	two_half_us_delay(6667);   								// wait for 18ms
+	us_delay(18000);   								// wait for 18ms
 	//HAL_Delay(2000);
     //HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   // pull the pin high
 	//two_half_us_delay(13);   								// wait for 30us
 	Set_Pin_Input(DHT11_PORT, DHT11_PIN);    		// set as input
-	two_half_us_delay(11);   								// wait for 30us
+	us_delay(30);   								// wait for 30us
 }
 
 uint8_t DHT11_Read (void)
@@ -56,7 +56,7 @@ uint8_t DHT11_Read (void)
 	for (j=0;j<8;j++)
 	{
 		while (!(HAL_GPIO_ReadPin (DHT11_PORT, DHT11_PIN)));   	// wait for the pin to go high
-		two_half_us_delay(14);   										// wait for 40 us
+		us_delay(40);   										// wait for 40 us
 		if (!(HAL_GPIO_ReadPin (DHT11_PORT, DHT11_PIN)))   		// if the pin is low
 		{
 			i&= ~(1<<(7-j));   									// write 0
@@ -70,11 +70,11 @@ uint8_t DHT11_Read (void)
 uint8_t DHT11_Check_Response (void)
 {
 	uint8_t Response = 0;
-	two_half_us_delay(14);
+	us_delay(40);				//wait 40 us
 	if (!(HAL_GPIO_ReadPin (DHT11_PORT, DHT11_PIN)))
 	{
 		//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
-		two_half_us_delay(30);
+		us_delay(80);				//wait 80 us
 		if ((HAL_GPIO_ReadPin (DHT11_PORT, DHT11_PIN))) Response = 1;
 		else Response = -1; // 255
 	}

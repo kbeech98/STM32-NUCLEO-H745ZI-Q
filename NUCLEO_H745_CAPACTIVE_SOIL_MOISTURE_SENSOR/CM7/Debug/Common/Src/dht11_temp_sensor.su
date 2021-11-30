@@ -1,0 +1,8 @@
+dht11_temp_sensor.c:16:6:two_half_us_delay	16	static
+dht11_temp_sensor.c:23:6:Set_Pin_Input	40	static
+dht11_temp_sensor.c:32:6:Set_Pin_Output	40	static
+dht11_temp_sensor.c:41:6:DHT11_Start	8	static
+dht11_temp_sensor.c:53:9:DHT11_Read	16	static
+dht11_temp_sensor.c:70:9:DHT11_Check_Response	16	static
+dht11_temp_sensor.c:87:6:poll_DHT11	8	static
+dht11_temp_sensor.c:110:6:delay_TEST	8	static
