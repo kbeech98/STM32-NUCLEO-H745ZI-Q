@@ -22,31 +22,11 @@ Tried to set up the DMA1 to transfer adc values to memory but ran into issue wit
 
 <h2>Key learnings</h2>
 
-- Implement LCD
+- Serial 4-bit LCD
 - Temperature and Humidity Sensor 
 - DMA controlled Soil Moisture Sensor 
 - Water Pump I/O Relay 
 - OP-amp PWM controlled LED Growlight 
-
-
-<h2>Installation</h2>
-
-1. Download this project as zip and extract it
-2. Import it in Android Studio
-3. Sync Gradle and run on your device/emulator
-
-<h2>Contributing</h2>
-Mention pull requests. Link to an example and/or put it down here
-
-<h2>Project status</h2>
-Insert here
-
-<h2>Credits</h2>
-
-- Author: Kristian Beech</a>
-- Illustrations
-- Colors
-- Any material
 
 <h2>Copyright</h2>
 This project is licensed under the terms of the MIT license and protected by Udacity Honor Code and Community Code of Conduct. See <a href="LICENSE.md">license</a> and <a href="LICENSE.DISCLAIMER.md">disclaimer</a>.
