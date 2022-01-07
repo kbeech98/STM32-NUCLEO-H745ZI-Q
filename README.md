@@ -21,7 +21,7 @@ The main goal is to present the various projects, the steps taken, along with an
 - [ ] Bluetooth Low Energy (BLE) RF 
 - [ ] PWM OP-AMP LED Growlight 
 - [ ] CMSIS - RTOS task and scheduling
-- [ ] Custom PCB
+- [ ] Altium Custom PCB
 
 <h2>The Workflow</h2>
 
