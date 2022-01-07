@@ -32,7 +32,7 @@ Tried to set up the DMA1 to transfer adc values to memory but ran into issue wit
 - [x] Parallel 4-bit LCD
 - [x] Serial Temperature and Humidity Sensor 
 - [ ] DMA Soil Moisture Sensor 
-- [ ] Water Pump I/O Relay
+- [ ] Water Pump I/O 120V Relay
 - [ ] Bluetooth Low Energy (BLE) RF 
 - [ ] PWM OP-AMP controlled LED Growlight 
 
