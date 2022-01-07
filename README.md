@@ -35,7 +35,7 @@ Researched possible issues relating to the DMA. Found that the STM32H7 has dCach
 - [ ] Water Pump I/O 120V Relay
 - [ ] Bluetooth Low Energy (BLE) RF 
 - [ ] PWM OP-AMP LED Growlight 
-- [ ] CMSIS - RTOS task and scheduling implementation 
+- [ ] CMSIS - RTOS task and scheduling
 
 <h2>Copyright</h2>
 This project is licensed under the terms of the MIT license and protected by Udacity Honor Code and Community Code of Conduct. See <a href="LICENSE.md">license</a> and <a href="LICENSE.DISCLAIMER.md">disclaimer</a>.
