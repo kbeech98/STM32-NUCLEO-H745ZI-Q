@@ -34,7 +34,7 @@ Tried to set up the DMA1 to transfer adc values to memory but ran into issue wit
 - [ ] DMA Soil Moisture Sensor 
 - [ ] Water Pump I/O 120V Relay
 - [ ] Bluetooth Low Energy (BLE) RF 
-- [ ] PWM OP-AMP controlled LED Growlight 
+- [ ] PWM OP-AMP LED Growlight 
 
 <h2>Copyright</h2>
 This project is licensed under the terms of the MIT license and protected by Udacity Honor Code and Community Code of Conduct. See <a href="LICENSE.md">license</a> and <a href="LICENSE.DISCLAIMER.md">disclaimer</a>.
