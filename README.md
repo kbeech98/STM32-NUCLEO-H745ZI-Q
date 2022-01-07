@@ -9,6 +9,8 @@
 This repository will contain a series of small projects that will form the foundation of my automated indoor farm project.  
 The main goal is to present the various projects, the steps taken, along with any challenges that were overcome. 
 
+<h2>Hardware</h2>
+
 # <h2>The Workflow</h2>
 
 #### NUCLEO_H745_NHD_20x4_PARALLEL_LCD
