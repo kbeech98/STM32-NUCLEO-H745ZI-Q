@@ -11,7 +11,18 @@ The main goal is to present the various projects, the steps taken, along with an
 
 <h2>Hardware</h2>
 
-# <h2>The Workflow</h2>
+<h2>Key Topics</h2>
+
+
+- [x] Parallel 4-bit LCD
+- [x] Serial Temperature and Humidity Sensor 
+- [ ] DMA Soil Moisture Sensor 
+- [ ] Water Pump I/O 120V Relay
+- [ ] Bluetooth Low Energy (BLE) RF 
+- [ ] PWM OP-AMP LED Growlight 
+- [ ] CMSIS - RTOS task and scheduling
+
+<h2>The Workflow</h2>
 
 #### NUCLEO_H745_NHD_20x4_PARALLEL_LCD
 First I implented the 20x4 LCD using a 4-bit addressing mode, had issues with: choosing write locations on display, timing in the initilization sequence, sending 8-bit data/commands in 4-bit nibbles//order of MSB/LSB.
@@ -26,18 +37,6 @@ Tried to set up the DMA1 to transfer adc values to memory but ran into issue wit
 
 Researched possible issues relating to the DMA. Found that the STM32H7 has dCache coherrency issues. Have to run cache cleaning and invaildation routines for the MPU to accept new data values in RAM.  
 
-
-
-# <h2>Key Topics</h2>
-
-
-- [x] Parallel 4-bit LCD
-- [x] Serial Temperature and Humidity Sensor 
-- [ ] DMA Soil Moisture Sensor 
-- [ ] Water Pump I/O 120V Relay
-- [ ] Bluetooth Low Energy (BLE) RF 
-- [ ] PWM OP-AMP LED Growlight 
-- [ ] CMSIS - RTOS task and scheduling
 
 <h2>Copyright</h2>
 This project is licensed under the terms of the MIT license and protected by Udacity Honor Code and Community Code of Conduct. See <a href="LICENSE.md">license</a> and <a href="LICENSE.DISCLAIMER.md">disclaimer</a>.
