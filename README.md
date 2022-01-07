@@ -4,7 +4,7 @@
 </strong>
 <br></p>
 <br/>
-<div align="center"><img src="https://user-images.githubusercontent.com/48364159/148620570-95fe8c84-9928-4f67-93aa-4d189a3a8abc.png"></img></div>
+<div align="center"><img src="https://user-images.githubusercontent.com/48364159/148620702-67aa7b54-be73-44d6-a2d8-1c29fc87c319.png"></img></div>
 <h2>About</h2>
 
 This repository will contain a series of small projects that will form the foundation of my automated indoor farm project.  
