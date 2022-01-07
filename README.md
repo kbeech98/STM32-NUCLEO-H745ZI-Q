@@ -20,7 +20,9 @@ Then the implementing the DHT11 sensor using single-wire serial communication. T
 #### NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR
 Next will be setting up the analog capacitive soil moisture sensors, I want to have multiple sensor read using only one ADC, this will be implemented using the DMA to pipe multiple inputs to memory. 
 
-Tried to set up the DMA1 to transfer adc values to memory but ran into issue with implementation. No data gets passed through dma. Tried using different dma streams, with ADC1 request multiplexed on DMAMUX1 using address 9U. Everything found online points to system level driver issues. Going to implement the adc individually for each soil sensor. 
+Tried to set up the DMA1 to transfer adc values to memory but ran into issue with implementation. No data gets passed through dma. Tried using different dma streams, with ADC1 request multiplexed on DMAMUX1 using address 9U. Everything found online points to system level driver issues. Going to implement the adc individually for each soil sensor.
+
+Researched possible issues relating to the DMA. Found that the STM32H7 has dCache coherrency issues. Have to run cache cleaning and invaildation routines for the MPU to accept new data values in RAM.  
 
 
 
