@@ -10,12 +10,13 @@
 This repository will contain a series of small projects that will form the foundation of my automated indoor farm project. The main goal is to present the various projects, the steps taken, along with any challenges that were overcome. 
 
 <h2>Hardware</h2>
-
+<!---
 <p align="center" width="100%">
     <img width="32%" src="https://user-images.githubusercontent.com/48364159/148620986-f79dfd09-b9be-40c4-be96-15f0608f4593.png">
     <img width="32%" src="https://user-images.githubusercontent.com/48364159/148620925-a93bb7fc-19a9-4e30-b7e5-c543aa33bd5e.png">
     <img width="32%" src="https://user-images.githubusercontent.com/48364159/148621034-3c0db89c-8327-4b01-8de3-d26966f653da.png">
 </p>
+-->
 
 <h2>Key Topics</h2>
 
