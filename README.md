@@ -7,7 +7,7 @@
 <div align="center"><img src="https://user-images.githubusercontent.com/48364159/148620702-67aa7b54-be73-44d6-a2d8-1c29fc87c319.png"></img></div>
 <h2>About</h2>
 
-This repository will contain a series of small projects that will form the foundation of my automated indoor farm project. The main goal is to present the various projects, the steps taken, along with any challenges that were overcome. 
+This repository contains various projects on the STM32H745ZI-Q NUCLEO dual-core development board. The series of projects will form the foundation of my automated indoor farm project. The main goal is to present the various projects, the steps taken, along with any challenges that were overcome. 
 
 <h2>Hardware</h2>
 <!---
