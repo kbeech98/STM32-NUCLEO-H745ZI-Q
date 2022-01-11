@@ -34,6 +34,8 @@ This repository contains various projects on the STM32H745ZI-Q NUCLEO dual-core 
 <h2>The Workflow</h2>
 
 #### NUCLEO_H745_NHD_20x4_PARALLEL_LCD
+The first project consisted of implementing a parallel 20x4 LCD display. The LCD communicates with the micro-controller using 8-bit data and command instructions sent through the bi-directional data bus. Using the timing diagram and online resources, I created an initilization function that uses the nessarasary 8-bit commands along with an enable pin, and a register select pin to interpret the type of data (data/command). I was able to split the data into two 4-bit nibbles which allowed me to initilization the LCD in 4-bit mode saving 4 pins on the micro-controller. 
+
 First I implented the 20x4 LCD using a 4-bit addressing mode, had issues with: choosing write locations on display, timing in the initilization sequence, sending 8-bit data/commands in 4-bit nibbles//order of MSB/LSB.
 
 #### NUCLEO_H745_DHT11_SERIAL_TEMP_SENSOR
