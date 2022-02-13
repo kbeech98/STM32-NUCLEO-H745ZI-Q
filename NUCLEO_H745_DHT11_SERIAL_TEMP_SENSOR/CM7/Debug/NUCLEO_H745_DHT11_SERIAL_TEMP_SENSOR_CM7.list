@@ -1721,7 +1721,8 @@ void send_to_lcd (char data, int rs)
  8000d54:	4819      	ldr	r0, [pc, #100]	; (8000dbc <send_to_lcd+0x7c>)
  8000d56:	f000 fddf 	bl	8001918 <HAL_GPIO_WritePin>
 
-	// write the data to the respective pin
+	// write data to the respective pin
+
 	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, ((data>>3)&0x01));
  8000d5a:	79fb      	ldrb	r3, [r7, #7]
  8000d5c:	08db      	lsrs	r3, r3, #3
@@ -1897,9 +1898,9 @@ void lcd_put_cur(int row, int col) //fix for 4x20 LCD !!!!!!!!!!!!!!!!!!!!!!!!!!
             break;
  8000e6e:	e009      	b.n	8000e84 <lcd_put_cur+0x50>
         case 2:
-            col |= 0x40;
+            col |= 0xE0;
  8000e70:	683b      	ldr	r3, [r7, #0]
- 8000e72:	f043 0340 	orr.w	r3, r3, #64	; 0x40
+ 8000e72:	f043 03e0 	orr.w	r3, r3, #224	; 0xe0
  8000e76:	603b      	str	r3, [r7, #0]
             break;
  8000e78:	e004      	b.n	8000e84 <lcd_put_cur+0x50>

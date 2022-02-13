@@ -1,10 +1,10 @@
-17:57:27 **** Incremental Build of configuration Debug for project NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM7 ****
+13:55:40 **** Incremental Build of configuration Debug for project NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM7 ****
 make -j8 all 
 arm-none-eabi-size   NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM7.elf 
    text	   data	    bss	    dec	    hex	filename
-  45484	    488	   2008	  47980	   bb6c	NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM7.elf
+  40708	    488	   1896	  43092	   a854	NUCLEO_H745_CAPACTIVE_SOIL_MOISTURE_SENSOR_CM7.elf
 Finished building: default.size.stdout
  
 
-17:57:28 Build Finished. 0 errors, 0 warnings. (took 223ms)
+13:55:41 Build Finished. 0 errors, 0 warnings. (took 216ms)
 

@@ -1,0 +1,28 @@
+/*
+ * DFRobot_soil_moisture_sensor.c
+ *
+ *  Created on: Nov. 20, 2021
+ *      Author: Kristian Beech
+ */
+
+#include "DFRobot_soil_sensor.h"
+
+/*void poll_SOIL_SENSOR(void)
+{
+	//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
+	//SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)SoilSensor) & ~(uint32_t)0x1F), RX_LENGTH+32);
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)SoilSensor, RX_LENGTH);
+	//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
+	while(adcConversionComplete == 0)
+	{
+
+	}
+	adcConversionComplete = 0;	//clear conversion complete flag
+	//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //Debugging LED
+	//SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)SoilSensor) & ~(uint32_t)0x1F), RX_LENGTH+32);
+}*/
+
+void poll_SOIL_SENSOR_1_2(void)
+{
+
+}

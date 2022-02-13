@@ -37,7 +37,8 @@ void send_to_lcd (char data, int rs)
 {
 	HAL_GPIO_WritePin(RS_GPIO_Port, RS_Pin, rs);  //rs = 1 for data, rs = 0 for command
 
-	// write the data to the respective pin
+	// write data to the respective pin
+
 	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, ((data>>3)&0x01));
 	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, ((data>>2)&0x01));
 	HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, ((data>>1)&0x01));
@@ -96,7 +97,7 @@ void lcd_put_cur(int row, int col) //fix for 4x20 LCD !!!!!!!!!!!!!!!!!!!!!!!!!!
             col |= 0xC0;
             break;
         case 2:
-            col |= 0x40;
+            col |= 0xE0;
             break;
         case 3:
             col |= 0xF0;
